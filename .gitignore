@@ -35,6 +35,7 @@ build/
 # Agent files (local development)
 .agent/node_modules/
 .agent/.env
+.claude/
 
 # Example app build artifacts (if any)
 example_rueda_enfermeria/dist/
