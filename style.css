@@ -356,3 +356,117 @@ tr:hover td {
         transform: rotate(360deg);
     }
 }
+
+/* Print Styles */
+@media print {
+    @page {
+        size: landscape;
+        margin: 10mm;
+    }
+
+    body {
+        background: transparent;
+        color: black;
+    }
+
+    header,
+    .controls-bar,
+    .legend,
+    #yearStats {
+        display: none !important;
+    }
+
+    .container {
+        padding: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .table-container {
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        overflow: visible !important;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 0.85rem;
+        table-layout: fixed;
+        /* Ensures no column expands too much */
+    }
+
+    th,
+    td {
+        border: 1px solid #000;
+        padding: 4px;
+        word-wrap: break-word;
+    }
+
+    th {
+        font-size: 0.75rem;
+    }
+
+    .shift-tag {
+        border: 1px solid #000;
+        box-shadow: none;
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
+
+    .worker-name {
+        gap: 0.25rem;
+        font-size: 0.8rem;
+    }
+
+    .avatar {
+        width: 20px;
+        height: 20px;
+        font-size: 0.6rem;
+    }
+
+    .total-count {
+        border: 1px solid #000;
+        padding: 2px 4px;
+        font-size: 0.8rem;
+    }
+
+    .badge {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+        border-width: 1px;
+    }
+
+    .shift-M {
+        background: #dbeafe !important;
+        color: #1e3a8a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .shift-T {
+        background: #fce7f3 !important;
+        color: #9d174d !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .shift-N {
+        background: #fef3c7 !important;
+        color: #b45309 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .shift-l {
+        background: #f1f5f9 !important;
+        color: #94a3b8 !important;
+        border-style: dashed !important;
+        border-color: #cbd5e1 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

@@ -447,4 +447,18 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
         document.body.removeChild(link);
     });
+
+    // Función Imprimir
+    const printBtn = document.getElementById('printBtn');
+    if (printBtn) {
+        printBtn.addEventListener('click', () => {
+            const currentWeek = weekSelector.value;
+            const originalTitle = document.title;
+            // Renombrar el documento para que el PDF/Papel se llame correctamente
+            document.title = `Cuadrante_Semana_${parseInt(currentWeek) + 1}`;
+            window.print();
+            // Restaurar título original
+            document.title = originalTitle;
+        });
+    }
 });
