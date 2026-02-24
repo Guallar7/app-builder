@@ -63,18 +63,22 @@ function generateWeekSchedule(prevSundayShifts, yearlyCounts) {
             validWorkers.push(w);
         }
 
-        // Priority heuristics: least shifts worked this year total
+        // New Priority heuristics: least HOURS worked this year total
         shuffleArray(validWorkers);
-        validWorkers.sort((a, b) => yearlyCounts[a] - yearlyCounts[b]);
+        validWorkers.sort((a, b) => yearlyCounts[a].hours - yearlyCounts[b].hours);
 
         for (let w of validWorkers) {
             worker_schedule[w][day] = shift;
             weekly_counts[w]++;
-            yearlyCounts[w]++;
+
+            let addedHours = (shift === SHIFT_M || shift === SHIFT_T) ? 7 : 10;
+            yearlyCounts[w].hours += addedHours;
+            yearlyCounts[w].total++;
 
             if (dfs(idx + 1)) return true;
 
-            yearlyCounts[w]--;
+            yearlyCounts[w].total--;
+            yearlyCounts[w].hours -= addedHours;
             weekly_counts[w]--;
             worker_schedule[w][day] = '';
         }
@@ -87,18 +91,18 @@ function generateWeekSchedule(prevSundayShifts, yearlyCounts) {
 
 function generateYear() {
     let yearSchedule = [];
-    let yearlyCounts = new Array(WORKERS).fill(0);
+    let yearlyCounts = Array.from({ length: WORKERS }, () => ({ total: 0, hours: 0 }));
     let prevSundayShifts = null;
 
     for (let week = 0; week < YEAR_WEEKS; week++) {
         // En caso de que se atasque muy puntual por "callejón sin salida"
         // Le damos hasta 3 intentos a esa semana barajando diferente
         let success = false;
-        let originalYearlyCounts = [...yearlyCounts];
+        let originalYearlyCounts = yearlyCounts.map(o => ({ ...o }));
 
         for (let attempt = 0; attempt < 10; attempt++) {
             // Restore counts if retry
-            yearlyCounts = [...originalYearlyCounts];
+            yearlyCounts = originalYearlyCounts.map(o => ({ ...o }));
             const weekSchedule = generateWeekSchedule(prevSundayShifts, yearlyCounts);
             if (weekSchedule) {
                 yearSchedule.push(weekSchedule);
@@ -195,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     else if (shift === SHIFT_N) weeklyHours += HOURS_N;
 
                 } else {
-                    td.innerHTML = `<span class="shift-tag shift-"></span>`;
+                    td.innerHTML = `<span class="shift-tag shift-l" style="background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3);">L</span>`;
                 }
                 tr.appendChild(td);
             });
@@ -258,9 +262,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Year stats display
-        let min = Math.min(...globalYearlyCounts);
-        let max = Math.max(...globalYearlyCounts);
-        yearStats.innerHTML = `Desviación total/empleado: min <b>${min}</b> - max <b>${max}</b> turnos`;
+        let hoursArray = globalYearlyCounts.map(worker => worker.hours);
+        let min = Math.min(...hoursArray);
+        let max = Math.max(...hoursArray);
+        yearStats.innerHTML = `Desviación Anual: min <b>${min}h</b> - max <b>${max}h</b>`;
 
         // Detailed Year Stats per Worker
         const detailedStatsDiv = document.getElementById('detailedYearStats');
@@ -318,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', startGeneration);
     startGeneration(); // Genera al cargar
 
-    // Función de exportación a CSV (Excel)
+    // Función de exportación a Excel (Styled XLS a través de HTML)
     const exportBtn = document.getElementById('exportBtn');
     exportBtn.addEventListener('click', () => {
         if (!globalYearSchedule) {
@@ -330,36 +335,113 @@ document.addEventListener('DOMContentLoaded', () => {
         const HOURS_T = 7;
         const HOURS_N = 10;
 
-        // Cabeceras CSV con punto y coma
-        let csvContent = "\uFEFF";
-        csvContent += "Semana;Trabajador;Lunes;Martes;Miércoles;Jueves;Viernes;Sábado;Domingo;Total Turnos;Total Horas\n";
+        let accumulatedStats = Array.from({ length: WORKERS }, () => ({ M: 0, T: 0, N: 0, hours: 0 }));
+
+        let htmlContent = `
+            <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+            <head>
+                <meta charset="utf-8">
+                <!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Cuadrante Anual</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+                <style>
+                    table { border-collapse: collapse; font-family: Arial, sans-serif; font-size: 11pt; }
+                    th { background-color: #3b82f6; color: white; border: 1px solid #94a3b8; padding: 6px; text-align: center; font-weight: bold; }
+                    td { border: 1px solid #cbd5e1; padding: 6px; text-align: center; vertical-align: middle; }
+                    .shift-M { background-color: #dbeafe; color: #1e3a8a; font-weight: bold; }
+                    .shift-T { background-color: #fce7f3; color: #9d174d; font-weight: bold; }
+                    .shift-N { background-color: #fef3c7; color: #b45309; font-weight: bold; }
+                    .shift-L { background-color: #f1f5f9; color: #94a3b8; }
+                    .worker-lbl { font-weight: bold; background-color: #f8fafc; text-align: left; }
+                    .week-lbl { font-weight: bold; background-color: #e2e8f0; }
+                    .blank-row td { background-color: #ffffff; border: none; height: 15px; }
+                    .totals-col { background-color: #f8fafc; color: #334155; font-weight: bold; }
+                    .hours-col { background-color: #ede9fe; color: #5b21b6; font-weight: bold; }
+                </style>
+            </head>
+            <body>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Semana</th>
+                            <th>Trabajador</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                            <th>Domingo</th>
+                            <th>Turnos (Sem)</th>
+                            <th>Horas (Sem)</th>
+                            <th>M Acumuladas</th>
+                            <th>T Acumuladas</th>
+                            <th>N Acumuladas</th>
+                            <th>Horas Acumuladas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
 
         globalYearSchedule.forEach((weekSchedule, weekIdx) => {
             weekSchedule.forEach((workerDays, workerIdx) => {
-                let row = `Semana ${weekIdx + 1};E${workerIdx + 1};`;
                 let count = 0;
                 let hours = 0;
 
+                let workerHtml = `<tr>
+                                    <td class="week-lbl">Sem ${weekIdx + 1}</td>
+                                    <td class="worker-lbl">E${workerIdx + 1}</td>`;
+
+                let shiftsHtml = '';
                 workerDays.forEach(shift => {
-                    row += `${shift};`;
                     if (shift !== '') {
                         count++;
-                        if (shift === SHIFT_M) hours += HOURS_M;
-                        else if (shift === SHIFT_T) hours += HOURS_T;
-                        else if (shift === SHIFT_N) hours += HOURS_N;
+                        if (shift === SHIFT_M) {
+                            hours += HOURS_M;
+                            accumulatedStats[workerIdx].M++;
+                            shiftsHtml += `<td class="shift-M">M</td>`;
+                        }
+                        else if (shift === SHIFT_T) {
+                            hours += HOURS_T;
+                            accumulatedStats[workerIdx].T++;
+                            shiftsHtml += `<td class="shift-T">T</td>`;
+                        }
+                        else if (shift === SHIFT_N) {
+                            hours += HOURS_N;
+                            accumulatedStats[workerIdx].N++;
+                            shiftsHtml += `<td class="shift-N">N</td>`;
+                        }
+                    } else {
+                        shiftsHtml += `<td class="shift-L">L</td>`;
                     }
                 });
-                row += `${count};${hours}h\n`;
-                csvContent += row;
+
+                accumulatedStats[workerIdx].hours += hours;
+
+                workerHtml += shiftsHtml;
+                workerHtml += `<td class="totals-col">${count}</td>`;
+                workerHtml += `<td class="hours-col">${hours}h</td>`;
+                workerHtml += `<td class="totals-col">${accumulatedStats[workerIdx].M}</td>`;
+                workerHtml += `<td class="totals-col">${accumulatedStats[workerIdx].T}</td>`;
+                workerHtml += `<td class="totals-col">${accumulatedStats[workerIdx].N}</td>`;
+                workerHtml += `<td class="hours-col">${accumulatedStats[workerIdx].hours}h</td>`;
+                workerHtml += `</tr>`;
+
+                htmlContent += workerHtml;
             });
-            csvContent += ";;;;;;;;;;\n";
+            htmlContent += `<tr class="blank-row"><td colspan="15"></td></tr>`;
         });
 
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        htmlContent += `
+                    </tbody>
+                </table>
+            </body>
+            </html>
+        `;
+
+        const blob = new Blob([htmlContent], { type: 'application/vnd.ms-excel;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.setAttribute("href", url);
-        link.setAttribute("download", "Cuadrante_Esterilizacion_52Semanas.csv");
+        link.setAttribute("download", "Cuadrante_Esterilizacion_Visual.xls");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
