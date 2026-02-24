@@ -120,6 +120,25 @@ function generateYear() {
     return true;
 }
 
+function calculateDetailedYearStats() {
+    let detailedStats = Array.from({ length: WORKERS }, () => ({ M: 0, T: 0, N: 0, Total: 0 }));
+
+    if (globalYearSchedule) {
+        globalYearSchedule.forEach(weekSchedule => {
+            weekSchedule.forEach((workerDays, workerIdx) => {
+                workerDays.forEach(shift => {
+                    if (shift === SHIFT_M) detailedStats[workerIdx].M++;
+                    else if (shift === SHIFT_T) detailedStats[workerIdx].T++;
+                    else if (shift === SHIFT_N) detailedStats[workerIdx].N++;
+
+                    if (shift !== '') detailedStats[workerIdx].Total++;
+                });
+            });
+        });
+    }
+    return detailedStats;
+}
+
 // UI
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('generateBtn');
@@ -142,7 +161,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const schedule = globalYearSchedule[weekIdx];
 
         tbody.innerHTML = '';
+        // Constants for hour calculations
+        const HOURS_M = 7;
+        const HOURS_T = 7;
+        const HOURS_N = 10;
+
         let totalAssigned = 0;
+        let totalHoursAssigned = 0;
 
         schedule.forEach((workerDays, workerIdx) => {
             const tr = document.createElement('tr');
@@ -157,23 +182,37 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.appendChild(workerTd);
 
             let count = 0;
+            let weeklyHours = 0;
+
             workerDays.forEach(shift => {
                 const td = document.createElement('td');
                 if (shift !== '') {
                     td.innerHTML = `<span class="shift-tag shift-${shift}">${shift}</span>`;
                     count++;
+
+                    if (shift === SHIFT_M) weeklyHours += HOURS_M;
+                    else if (shift === SHIFT_T) weeklyHours += HOURS_T;
+                    else if (shift === SHIFT_N) weeklyHours += HOURS_N;
+
                 } else {
                     td.innerHTML = `<span class="shift-tag shift-"></span>`;
                 }
                 tr.appendChild(td);
             });
 
-            const totalTd = document.createElement('td');
-            totalTd.innerHTML = `<span class="total-count">${count}</span>`;
-            tr.appendChild(totalTd);
+            // Count column
+            const countTd = document.createElement('td');
+            countTd.innerHTML = `<span class="total-count">${count}</span>`;
+            tr.appendChild(countTd);
+
+            // Hours column
+            const hoursTd = document.createElement('td');
+            hoursTd.innerHTML = `<span class="total-count" style="background: rgba(139, 92, 246, 0.4);">${weeklyHours}h</span>`;
+            tr.appendChild(hoursTd);
 
             tbody.appendChild(tr);
             totalAssigned += count;
+            totalHoursAssigned += weeklyHours;
         });
 
         // TFoot totales
@@ -210,13 +249,52 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalTd = document.createElement('td');
             totalTd.innerHTML = `<span class="total-count">${totalAssigned}</span>`;
             tr.appendChild(totalTd);
+
+            const totalHoursTd = document.createElement('td');
+            totalHoursTd.innerHTML = `<span class="total-count" style="background: rgba(139, 92, 246, 0.4);">${totalHoursAssigned}h</span>`;
+            tr.appendChild(totalHoursTd);
+
             tfoot.appendChild(tr);
         }
 
         // Year stats display
         let min = Math.min(...globalYearlyCounts);
         let max = Math.max(...globalYearlyCounts);
-        yearStats.innerHTML = `Turnos año/empleado: min <b>${min}</b>, max <b>${max}</b>`;
+        yearStats.innerHTML = `Desviación total/empleado: min <b>${min}</b> - max <b>${max}</b> turnos`;
+
+        // Detailed Year Stats per Worker
+        const detailedStatsDiv = document.getElementById('detailedYearStats');
+        if (detailedStatsDiv) {
+            detailedStatsDiv.innerHTML = '';
+            const stats = calculateDetailedYearStats();
+
+            stats.forEach((workerStat, idx) => {
+                const totalYearlyHours = (workerStat.M * HOURS_M) + (workerStat.T * HOURS_T) + (workerStat.N * HOURS_N);
+
+                const card = document.createElement('div');
+                card.style.background = 'rgba(0,0,0,0.2)';
+                card.style.border = '1px solid var(--border-color)';
+                card.style.borderRadius = '8px';
+                card.style.padding = '10px';
+
+                card.innerHTML = `
+                    <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px; display: flex; justify-content: space-between;">
+                        <span>
+                            <span class="avatar" style="width: 20px; height: 20px; font-size: 0.6rem; display: inline-flex; margin-right: 5px;">E${idx + 1}</span>
+                            Enfermero/a ${idx + 1}
+                        </span>
+                        <span style="color: var(--primary-color);">${totalYearlyHours}h / año</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; font-size: 0.85rem; color: var(--text-secondary);">
+                        <span title="Total Mañanas"><span style="color: var(--shift-m)">M</span>: ${workerStat.M}</span>
+                        <span title="Total Tardes"><span style="color: var(--shift-t)">T</span>: ${workerStat.T}</span>
+                        <span title="Total Noches"><span style="color: var(--shift-n)">N</span>: ${workerStat.N}</span>
+                        <strong style="margin-left: auto; color: white;">Total: ${workerStat.Total}</strong>
+                    </div>
+                `;
+                detailedStatsDiv.appendChild(card);
+            });
+        }
     }
 
     weekSelector.addEventListener('change', renderActiveWeek);
@@ -248,27 +326,35 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Cabeceras CSV con punto y coma (suele ser mejor para Excel en español)
-        let csvContent = "\uFEFF"; // BOM para UTF-8
-        csvContent += "Semana;Trabajador;Lunes;Martes;Miércoles;Jueves;Viernes;Sábado;Domingo;Total\n";
+        const HOURS_M = 7;
+        const HOURS_T = 7;
+        const HOURS_N = 10;
+
+        // Cabeceras CSV con punto y coma
+        let csvContent = "\uFEFF";
+        csvContent += "Semana;Trabajador;Lunes;Martes;Miércoles;Jueves;Viernes;Sábado;Domingo;Total Turnos;Total Horas\n";
 
         globalYearSchedule.forEach((weekSchedule, weekIdx) => {
             weekSchedule.forEach((workerDays, workerIdx) => {
                 let row = `Semana ${weekIdx + 1};E${workerIdx + 1};`;
                 let count = 0;
+                let hours = 0;
 
                 workerDays.forEach(shift => {
                     row += `${shift};`;
-                    if (shift !== '') count++;
+                    if (shift !== '') {
+                        count++;
+                        if (shift === SHIFT_M) hours += HOURS_M;
+                        else if (shift === SHIFT_T) hours += HOURS_T;
+                        else if (shift === SHIFT_N) hours += HOURS_N;
+                    }
                 });
-                row += `${count}\n`;
+                row += `${count};${hours}h\n`;
                 csvContent += row;
             });
-            // Una línea en blanco entre semanas
-            csvContent += ";;;;;;;;;\n";
+            csvContent += ";;;;;;;;;;\n";
         });
 
-        // Crear un Blob y forzar la descarga
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");

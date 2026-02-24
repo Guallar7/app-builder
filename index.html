@@ -49,7 +49,8 @@
                             <th>Viernes</th>
                             <th>Sábado</th>
                             <th>Domingo</th>
-                            <th>Total</th>
+                            <th>Total Turnos</th>
+                            <th>Horas (Sem)</th>
                         </tr>
                     </thead>
                     <tbody id="scheduleBody">
@@ -61,10 +62,18 @@
                 </table>
             </div>
 
-            <div class="legend">
+            <div class="legend" style="flex-wrap: wrap;">
                 <div class="legend-item"><span class="badge m-badge">M</span> Mañana (1 requerido)</div>
                 <div class="legend-item"><span class="badge t-badge">T</span> Tarde (5/4/1 requeridos)</div>
                 <div class="legend-item"><span class="badge n-badge">N</span> Noche (3/3/1 requeridos)</div>
+                <div
+                    style="flex-basis: 100%; border-top: 1px solid var(--border-color); margin-top: 1rem; padding-top: 1rem;">
+                    <h3 style="margin-top: 0; font-size: 1.1rem; color: white;">Estadísticas Acumuladas del Año</h3>
+                    <div id="detailedYearStats"
+                        style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;">
+                        <!-- JS generará aquí las cards de cada empleado -->
+                    </div>
+                </div>
             </div>
         </main>
     </div>
