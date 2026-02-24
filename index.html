@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Turnos - Esterilización</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Rueda de Enfermería</h1>
+                <p>Generador inteligente de turnos para el área de Esterilización</p>
+            </div>
+            <button id="generateBtn" class="btn-primary">
+                <span class="icon">✨</span> Generar Nuevo Cuadrante
+            </button>
+        </header>
+
+        <main>
+            <div class="stats-panel" id="statsPanel">
+                <!-- Se llenará con JS -->
+            </div>
+
+            <div class="table-container">
+                <table id="scheduleTable">
+                    <thead>
+                        <tr>
+                            <th>Trabajador</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                            <th>Domingo</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleBody">
+                        <!-- Generado dinámicamente -->
+                    </tbody>
+                    <tfoot id="scheduleFoot">
+                        <!-- Generado dinámicamente: Totales -->
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item"><span class="badge m-badge">M</span> Mañana (1 requerido)</div>
+                <div class="legend-item"><span class="badge t-badge">T</span> Tarde (5/4/1 requeridos)</div>
+                <div class="legend-item"><span class="badge n-badge">N</span> Noche (3/3/1 requeridos)</div>
+            </div>
+        </main>
+    </div>
+
+    <div id="loadingOverlay" class="overlay hidden">
+        <div class="spinner"></div>
+        <p>Calculando cuadrante óptimo...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
