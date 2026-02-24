@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Hours column
             const hoursTd = document.createElement('td');
-            hoursTd.innerHTML = `<span class="total-count" style="background: rgba(139, 92, 246, 0.4);">${weeklyHours}h</span>`;
+            hoursTd.innerHTML = `<span class="total-count" style="background: #ede9fe; color: #5b21b6; border-color: #c4b5fd;">${weeklyHours}h</span>`;
             tr.appendChild(hoursTd);
 
             tbody.appendChild(tr);
@@ -224,11 +224,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tfoot) {
             tfoot.innerHTML = '';
             const tr = document.createElement('tr');
-            tr.style.background = 'rgba(0,0,0,0.2)';
+            tr.style.background = '#f8fafc';
             tr.style.borderTop = '2px solid var(--border-color)';
 
             const labelTd = document.createElement('td');
-            labelTd.innerHTML = '<div class="worker-name" style="justify-content: flex-end; color: var(--text-secondary);"><strong>Suma M/T/N</strong></div>';
+            labelTd.innerHTML = '<div class="worker-name" style="justify-content: flex-end; color: var(--text-primary);"><strong>Suma M/T/N</strong></div>';
             tr.appendChild(labelTd);
 
             for (let day = 0; day < DAYS; day++) {
@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.appendChild(totalTd);
 
             const totalHoursTd = document.createElement('td');
-            totalHoursTd.innerHTML = `<span class="total-count" style="background: rgba(139, 92, 246, 0.4);">${totalHoursAssigned}h</span>`;
+            totalHoursTd.innerHTML = `<span class="total-count" style="background: #ede9fe; color: #5b21b6; border-color: #c4b5fd;">${totalHoursAssigned}h</span>`;
             tr.appendChild(totalHoursTd);
 
             tfoot.appendChild(tr);
@@ -277,24 +277,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 const totalYearlyHours = (workerStat.M * HOURS_M) + (workerStat.T * HOURS_T) + (workerStat.N * HOURS_N);
 
                 const card = document.createElement('div');
-                card.style.background = 'rgba(0,0,0,0.2)';
-                card.style.border = '1px solid var(--border-color)';
+                card.style.background = '#f8fafc';
+                card.style.border = '2px solid var(--border-color)';
                 card.style.borderRadius = '8px';
-                card.style.padding = '10px';
+                card.style.padding = '12px';
+                card.style.boxShadow = '2px 2px 0px rgba(71, 85, 105, 0.1)';
 
                 card.innerHTML = `
-                    <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px; display: flex; justify-content: space-between;">
-                        <span>
-                            <span class="avatar" style="width: 20px; height: 20px; font-size: 0.6rem; display: inline-flex; margin-right: 5px;">E${idx + 1}</span>
+                    <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 8px; border-bottom: 2px solid var(--border-color); padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary);">
+                        <span style="display: flex; align-items: center;">
+                            <span class="avatar" style="width: 24px; height: 24px; font-size: 0.65rem; margin-right: 8px;">E${idx + 1}</span>
                             Enfermero/a ${idx + 1}
                         </span>
-                        <span style="color: var(--primary-color);">${totalYearlyHours}h / año</span>
+                        <span style="color: var(--primary-color); background: #ede9fe; padding: 2px 6px; border-radius: 4px; border: 1px solid #c4b5fd; font-size: 0.8rem;">${totalYearlyHours}h / año</span>
                     </div>
-                    <div style="display: flex; gap: 8px; font-size: 0.85rem; color: var(--text-secondary);">
-                        <span title="Total Mañanas"><span style="color: var(--shift-m)">M</span>: ${workerStat.M}</span>
-                        <span title="Total Tardes"><span style="color: var(--shift-t)">T</span>: ${workerStat.T}</span>
-                        <span title="Total Noches"><span style="color: var(--shift-n)">N</span>: ${workerStat.N}</span>
-                        <strong style="margin-left: auto; color: white;">Total: ${workerStat.Total}</strong>
+                    <div style="display: flex; gap: 8px; font-size: 0.85rem; color: var(--text-secondary); align-items: center;">
+                        <span title="Total Mañanas"><span style="color: var(--shift-m); font-weight: bold;">M</span>: ${workerStat.M}</span>
+                        <span title="Total Tardes"><span style="color: var(--shift-t); font-weight: bold;">T</span>: ${workerStat.T}</span>
+                        <span title="Total Noches"><span style="color: var(--shift-n); font-weight: bold;">N</span>: ${workerStat.N}</span>
+                        <strong style="margin-left: auto; color: var(--text-primary); background: #f1f5f9; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-dark);">Total: ${workerStat.Total}</strong>
                     </div>
                 `;
                 detailedStatsDiv.appendChild(card);
