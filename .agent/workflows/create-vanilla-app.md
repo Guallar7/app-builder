@@ -33,44 +33,92 @@ Follow these exact steps when the user asks to create an app using this workflow
 
 // turbo-all
 
-**Step 1: Ask for app name and set up the requirements**
-1. Ask the user for an **app name** (e.g., "mi_calculadora_clinica", "gestor_pacientes")
-2. Create a **dedicated folder** with that name (e.g., `mi_calculadora_clinica/`)
-3. Create `Instrucciones.md` inside that folder with the following template and ask the user to fill it out:
-*   `Instrucciones.md`:
+### **PHASE 1: DISCOVERY & REQUIREMENTS** (Interactive Dialog)
+
+**Step 1: Understand the user's vision**
+
+Start a conversation with the user to deeply understand what they want to build. Ask targeted questions:
+- What problem are they solving?
+- Who will use this app? (doctors, nurses, patients, etc.)
+- What are the main tasks the app should do?
+- Any specific calculations or logic needed?
+
+Listen carefully and ask follow-up questions until you understand clearly.
+
+**Step 2: Suggest and agree on an app name**
+
+Based on the conversation, suggest 2-3 app names (in lowercase with underscores, e.g., `calculadora_dosis`, `gestor_pacientes_uci`).
+
+Ask the user to choose or suggest their own name.
+
+IMPORTANT: The name should be descriptive and relevant to the app's purpose.
+
+**Step 3: Write the Instrucciones.md (Draft)**
+
+Based on your conversation, write a **complete and detailed** `Instrucciones.md` file with this structure:
+
 ```markdown
 # Instrucciones de la Aplicación
 
 ## Objetivo Principal
-[Describe qué hace la aplicación en 1-2 frases]
+[1-2 sentence summary of what the app does and who uses it]
 
 ## Funcionalidades Clave
-- [Funcionalidad 1]
-- [Funcionalidad 2]
+- [Feature 1 - specific and detailed]
+- [Feature 2 - specific and detailed]
+- [Feature 3]
 
 ## Reglas de Negocio / Lógica
-- [Regla 1]
-- [Regla 2]
-```
-PAUSE: Wait for the user to provide the requirements before continuing.
+- [Rule 1: Clear business logic or calculation rules]
+- [Rule 2]
+- [Rule 3]
 
-**Step 2: Set up the workspace**
-Create the necessary files **inside the dedicated app folder** based on the instructions:
+## Notas Adicionales
+[Any special requirements, edge cases, or important considerations]
+```
+
+**IMPORTANT**: This should be detailed, not generic. Example:
+- ✅ Good: "Calculate pediatric medication dose based on weight in kg, using standard mg/kg/day dosing. Show warning if dose exceeds 100mg/day."
+- ❌ Bad: "Medication calculator"
+
+**Step 4: Show the draft to the user and request feedback**
+
+Display the `Instrucciones.md` you wrote to the user and ask:
+- "Does this accurately describe what you want?"
+- "Is anything missing or incorrect?"
+- "Would you like to add, remove, or change anything?"
+
+PAUSE: Wait for the user's feedback. If they request changes, modify the `Instrucciones.md` and show it again.
+
+**Step 5: User approves and you create the workspace**
+
+Once the user confirms the instructions are correct, proceed:
+
+1. Create a **dedicated folder** named after the app (e.g., `calculadora_dosis/`)
+2. Create `Instrucciones.md` **inside that folder** with the final, approved content
+3. Announce: "✅ App folder and instructions created! Ready to build your app."
+
+### **PHASE 2: BUILD THE APPLICATION**
+
+**Step 6: Set up the workspace files**
+
+Create the necessary files **inside the dedicated app folder** based on the approved instructions:
 *   `index.html`
 *   `style.css`
 *   `app.js`
 *   `README.md` (User guide explaining how to open and use the app)
 
-**Step 3: Generate `index.html`**
+**Step 7: Generate `index.html`**
 Write valid HTML5 boilerplate.
 *   Include viewport meta tag: `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
 *   Link to Google Fonts.
 *   Link to `style.css`.
 *   Link to `app.js` just before the closing `</body>` tag.
 *   Create a semantic structure (`<header>`, `<main>`, `<footer>`, `<section>`).
+*   Follow the app's requirements exactly as described in `Instrucciones.md`.
 
-**Step 4: Generate `style.css`**
-Set up the design system.
+**Step 8: Generate `style.css`**
+Set up the design system with a premium, modern look.
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -95,18 +143,82 @@ body {
 /* Add premium styling for buttons, cards, and inputs here */
 ```
 
-**Step 5: Generate `app.js`**
-Implement the logic using modern JavaScript (ES6+).
+**Step 9: Generate `app.js`**
+Implement the logic using modern JavaScript (ES6+) based on the rules in `Instrucciones.md`.
 *   Use `const` and `let`.
 *   Use Arrow Functions.
 *   Wait for DOM content to load before attaching event listeners.
 *   Keep functions small and focused.
+*   Implement all business logic described in the requirements.
 
-**Step 6: Write Documentation**
-*   **`README.md`**: Explain to the user (who might be non-technical) that they only need to double-click `index.html` to run the app. No installation needed. Include a brief overview of what the app does based on `Instrucciones.md`.
+**Step 10: Write Documentation (`README.md`)**
+Create a simple, friendly guide for the user:
+*   Explain that they only need to double-click `index.html` to run the app
+*   No installation or servers needed
+*   Brief overview of what the app does
+*   Simple usage instructions for non-technical users
 
-## 4. Final Review
+### **PHASE 3: COMPLETION & DELIVERY**
+
+**Step 11: Final Review**
+
 Before notifying the user, verify:
-*   Does it run without a server?
-*   Is the design premium (fonts, shadows, radiuses)?
-*   Are no frameworks used?
+*   ✅ Does it run without a server? (Just double-click `index.html`)
+*   ✅ Is the design premium? (fonts, shadows, radiuses, smooth transitions)
+*   ✅ Are no frameworks used? (pure HTML, CSS, JavaScript)
+*   ✅ Does it implement ALL requirements from `Instrucciones.md`?
+*   ✅ Is the app tested and working correctly?
+
+**Step 12: Notify user and guide next steps**
+
+Message to the user:
+```
+✅ Your app is ready!
+
+📂 Find your app in the folder: [app_name]/
+🖥️ To use it: Double-click on index.html
+🌐 To share it: See the README.md for Netlify Drop instructions
+
+The app is fully functional and ready to use!
+```
+
+**Step 13: Optional - Guide user on sharing**
+
+If the user wants to share their app:
+- Explain Netlify Drop process
+- Show them exactly which folder to drag-and-drop
+- Provide the link once deployed
+
+---
+
+## 4. Important Notes for the AI
+
+### Dialog and Iteration
+- **Phase 1 is interactive**: Ask questions, listen carefully, and iterate until requirements are crystal clear
+- Don't rush to coding. Understanding the user's needs is the most important part
+- If something is unclear, ask again with different words or examples
+- Suggest improvements or clarifications when needed
+
+### Naming Convention
+- App names should be: `lowercase_with_underscores`
+- Examples: `calculadora_pediatrica`, `generador_turnos_icu`, `gestor_pacientes_covid`
+- Short and descriptive (2-4 words max)
+
+### Instructions File Quality
+- `Instrucciones.md` is the "spec" for building the app
+- It must be detailed, not vague
+- Specific calculations, rules, and edge cases should be mentioned
+- This is shown to the user and must be understandable to a non-technical person
+
+### Feedback Loop
+- Always show drafts to the user before creating files
+- Ask explicitly: "Is this correct?" and wait for confirmation
+- Make changes if needed and show again
+- Only proceed to file creation after explicit approval
+
+### User Experience
+- Be friendly and encouraging
+- Use emojis and clear formatting
+- Celebrate small victories ("Great! I understand now...")
+- Break down steps clearly
+- Remember: the user is not a programmer, so explain everything in simple terms
