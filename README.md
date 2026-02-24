@@ -20,10 +20,21 @@ Para usar esto, necesitas abrir esta carpeta con un Agente de IA. Recomendamos e
 4.  **Espera la Magia**: Una vez le confirmes a la IA que has terminado de describir la herramienta, ella construirá tu aplicación completa con un diseño premium y moderno.
 5.  **¡Úsala!**: Cuando la IA termine, simplemente busca en tu carpeta el nuevo archivo llamado **`index.html`** y haz **doble clic** sobre él. Se abrirá en tu navegador de internet (Chrome, Edge, Safari...) ¡y estará lista para usar! No necesitas instalar servidores, ni bases de datos, ni nada complicado.
 
+## 🌐 Cómo compartir tu aplicación con otros
+
+Si estás contento con el resultado y quieres que otros compañeros puedan usar tu aplicación desde sus propios ordenadores o móviles sin enviarles archivos ZIP:
+
+1.  Entra en **[Netlify Drop](https://app.netlify.com/drop)**.
+2.  **Arrastra y suelta** tu carpeta completa del proyecto en el círculo que aparece en la web.
+3.  En unos segundos, Netlify te dará un **enlace público** (puedes personalizarlo si te registras gratis).
+4.  ¡Envía ese enlace por WhatsApp o email y cualquiera podrá usar tu herramienta!
+
 ## 📂 ¿Qué hay en estas carpetas?
 
 *   📁 **`.agent/workflows/`**: Aquí vive el "cerebro" que le enseña a la IA cómo construir aplicaciones fiables, bonitas y seguras, usando tecnología que funciona en cualquier ordenador sin instalaciones.
-*   📁 **`example_rueda_enfermeria/`**: Esta es una aplicación real y muy útil creada exactamente con este método. Es un generador automático de turnos para el servicio de esterilización. Puedes entrar en esa carpeta y hacer doble clic en su archivo `index.html` para ver de lo que esta Inteligencia Artificial es capaz.
+*   📁 **`example_rueda_enfermeria/`**: Esta es una aplicación real y muy útil creada exactamente con este método. Es un generador automático de turnos para el servicio de esterilización. 
+    *   🚀 **Demo en vivo**: Puedes ver la aplicación funcionando aquí: [rueda-enfermeria.netlify.app](https://rueda-enfermeria.netlify.app/)
+    *   También puedes entrar en esa carpeta y hacer doble clic en su archivo `index.html` para ver de lo que esta Inteligencia Artificial es capaz.
 
 ---
 *No necesitas saber qué es HTML, CSS o Javascript. Tu único trabajo es ser el experto en tu especialidad clínica y describir claramente qué problema necesitas resolver.*
