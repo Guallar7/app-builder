@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.sublime-project
+.sublime-workspace
+
+# OS
+Thumbs.db
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+*.min.js
+*.min.css
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Agent files (local development)
+.agent/node_modules/
+.agent/.env
+
+# Example app build artifacts (if any)
+example_rueda_enfermeria/dist/
+example_rueda_enfermeria/build/
