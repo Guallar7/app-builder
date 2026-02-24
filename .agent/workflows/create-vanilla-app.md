@@ -33,9 +33,11 @@ Follow these exact steps when the user asks to create an app using this workflow
 
 // turbo-all
 
-**Step 1: Set up the requirements**
-Create `Instrucciones.md` with the following template and ask the user to fill it out:
-*   `Instrucciones.md`: 
+**Step 1: Ask for app name and set up the requirements**
+1. Ask the user for an **app name** (e.g., "mi_calculadora_clinica", "gestor_pacientes")
+2. Create a **dedicated folder** with that name (e.g., `mi_calculadora_clinica/`)
+3. Create `Instrucciones.md` inside that folder with the following template and ask the user to fill it out:
+*   `Instrucciones.md`:
 ```markdown
 # Instrucciones de la Aplicación
 
@@ -53,7 +55,7 @@ Create `Instrucciones.md` with the following template and ask the user to fill i
 PAUSE: Wait for the user to provide the requirements before continuing.
 
 **Step 2: Set up the workspace**
-Create the necessary files in the target directory based on the instructions:
+Create the necessary files **inside the dedicated app folder** based on the instructions:
 *   `index.html`
 *   `style.css`
 *   `app.js`

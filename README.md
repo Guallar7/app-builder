@@ -16,18 +16,19 @@ Para usar esto, necesitas abrir esta carpeta con un Agente de IA. Recomendamos e
 1.  **Abre tu Asistente de IA (ej. Antigravity)**: Dirígete a la ventana de chat de tu Inteligencia Artificial.
 2.  **Escribe el Comando Mágico**: En el chat, escribe exactamente esto y presiona la tecla Enter:
     **`/create-vanilla-app`**
-3.  **Describe tu Idea**: La IA creará inmediatamente un archivo llamado `Instrucciones.md`. Ábrelo y rellena los huecos describiendo tu aplicación en lenguaje normal (español o inglés). Explícale qué botones quieres, qué cálculos matemáticos debe hacer el sistema, etc.
-4.  **Espera la Magia**: Una vez le confirmes a la IA que has terminado de describir la herramienta, ella construirá tu aplicación completa con un diseño premium y moderno.
-5.  **¡Úsala!**: Cuando la IA termine, simplemente busca en tu carpeta el nuevo archivo llamado **`index.html`** y haz **doble clic** sobre él. Se abrirá en tu navegador de internet (Chrome, Edge, Safari...) ¡y estará lista para usar! No necesitas instalar servidores, ni bases de datos, ni nada complicado.
+3.  **Dale un nombre a tu app**: La IA te pedirá el nombre de tu aplicación (ej: "mi_calculadora", "gestor_turnos"). Ella creará una **carpeta dedicada** con ese nombre.
+4.  **Describe tu Idea**: La IA creará un archivo llamado `Instrucciones.md` dentro de esa carpeta. Ábrelo y rellena los huecos describiendo tu aplicación en lenguaje normal (español o inglés). Explícale qué botones quieres, qué cálculos matemáticos debe hacer el sistema, etc.
+5.  **Espera la Magia**: Una vez le confirmes a la IA que has terminado de describir la herramienta, ella construirá tu aplicación completa con un diseño premium y moderno.
+6.  **¡Úsala!**: Cuando la IA termine, dentro de la carpeta de tu app encontrarás el archivo **`index.html`**. Haz **doble clic** sobre él. Se abrirá en tu navegador de internet (Chrome, Edge, Safari...) ¡y estará lista para usar! No necesitas instalar servidores, ni bases de datos, ni nada complicado.
 
 ## 🌐 Cómo compartir tu aplicación con otros
 
 Si estás contento con el resultado y quieres que otros compañeros puedan usar tu aplicación desde sus propios ordenadores o móviles sin enviarles archivos ZIP:
 
-1.  Entra en **[Netlify Drop](https://app.netlify.com/drop)**.
-2.  **Arrastra y suelta** tu carpeta completa del proyecto en el círculo que aparece en la web.
-3.  En unos segundos, Netlify te dará un **enlace público** (puedes personalizarlo si te registras gratis).
-4.  ¡Envía ese enlace por WhatsApp o email y cualquiera podrá usar tu herramienta!
+1.  Abre **[Netlify Drop](https://app.netlify.com/drop)** en tu navegador.
+2.  **Arrastra y suelta la carpeta de tu aplicación** (la que contiene `index.html`, `style.css`, `app.js`) en el área de Netlify Drop.
+3.  En unos segundos, Netlify te dará un **enlace público único** (puedes personalizarlo si te registras gratis).
+4.  ¡Envía ese enlace por WhatsApp o email y cualquiera podrá usar tu herramienta desde cualquier dispositivo! ✨
 
 ## 📂 ¿Qué hay en estas carpetas?
 
