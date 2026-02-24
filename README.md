@@ -11,9 +11,9 @@ Puedes imaginarlo como tener a un ingeniero de software experto sentado a tu lad
 
 ## 🚀 Cómo crear tu propia aplicación (Paso a Paso)
 
-Para usar esto, solo necesitas abrir esta carpeta con tu Agente de IA (como el que estás usando ahora mismo).
+Para usar esto, necesitas abrir esta carpeta con un Agente de IA. Recomendamos encarecidamente usar **Antigravity**, aunque otros agentes como Claude Code, GitHub Copilot (Agentes) o Cursor también pueden funcionar.
 
-1.  **Abre el Asistente de IA**: Dirígete a la ventana de chat de tu Inteligencia Artificial.
+1.  **Abre tu Asistente de IA (ej. Antigravity)**: Dirígete a la ventana de chat de tu Inteligencia Artificial.
 2.  **Escribe el Comando Mágico**: En el chat, escribe exactamente esto y presiona la tecla Enter:
     **`/create-vanilla-app`**
 3.  **Describe tu Idea**: La IA creará inmediatamente un archivo llamado `Instrucciones.md`. Ábrelo y rellena los huecos describiendo tu aplicación en lenguaje normal (español o inglés). Explícale qué botones quieres, qué cálculos matemáticos debe hacer el sistema, etc.
