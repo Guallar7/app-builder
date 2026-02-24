@@ -17,13 +17,24 @@
                 <p>Generador inteligente de turnos para el área de Esterilización</p>
             </div>
             <button id="generateBtn" class="btn-primary">
-                <span class="icon">✨</span> Generar Nuevo Cuadrante
+                <span class="icon">✨</span> Generar Todo el Año
             </button>
         </header>
 
         <main>
             <div class="stats-panel" id="statsPanel">
                 <!-- Se llenará con JS -->
+            </div>
+
+            <div class="controls-bar">
+                <label for="weekSelector">Visualizar Semana:</label>
+                <select id="weekSelector" class="form-select">
+                    <!-- Options creadas en JS -->
+                </select>
+                <button id="exportBtn" class="btn-secondary" style="margin-left: 10px;">
+                    📊 Exportar Año a Excel
+                </button>
+                <span id="yearStats" class="year-stats"></span>
             </div>
 
             <div class="table-container">
