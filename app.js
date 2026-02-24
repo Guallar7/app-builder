@@ -89,12 +89,19 @@ function generateWeekSchedule(prevSundayShifts, yearlyCounts) {
     return null;
 }
 
-function generateYear() {
+function generateYear(startWeek = 0) {
     let yearSchedule = [];
     let yearlyCounts = Array.from({ length: WORKERS }, () => ({ total: 0, hours: 0 }));
     let prevSundayShifts = null;
 
-    for (let week = 0; week < YEAR_WEEKS; week++) {
+    if (startWeek > 0) {
+        // Dejar semanas anteriores vacías
+        for (let week = 0; week < startWeek; week++) {
+            yearSchedule.push(Array.from({ length: WORKERS }, () => new Array(DAYS).fill('')));
+        }
+    }
+
+    for (let week = startWeek; week < YEAR_WEEKS; week++) {
         // En caso de que se atasque muy puntual por "callejón sin salida"
         // Le damos hasta 3 intentos a esa semana barajando diferente
         let success = false;
@@ -149,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tbody = document.getElementById('scheduleBody');
     const overlay = document.getElementById('loadingOverlay');
     const weekSelector = document.getElementById('weekSelector');
+    const startWeekSetting = document.getElementById('startWeekSetting');
     const yearStats = document.getElementById('yearStats');
 
     // Popular selector de semanas
@@ -157,6 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
         opt.value = i;
         opt.innerHTML = `Semana ${i + 1}`;
         weekSelector.appendChild(opt);
+
+        let opt2 = document.createElement('option');
+        opt2.value = i;
+        opt2.innerHTML = `Semana ${i + 1}`;
+        startWeekSetting.appendChild(opt2);
     }
 
     function renderActiveWeek() {
@@ -306,15 +319,19 @@ document.addEventListener('DOMContentLoaded', () => {
     weekSelector.addEventListener('change', renderActiveWeek);
 
     function startGeneration() {
+        const startWeek = parseInt(startWeekSetting.value) || 0;
+
         overlay.classList.remove('hidden');
-        overlay.querySelector('p').innerText = "Generando 52 semanas matemáticas (esto puede tomar un momento)...";
+        overlay.querySelector('p').innerText = startWeek === 0
+            ? "Generando 52 semanas matemáticas (esto puede tomar un momento)..."
+            : `Generando desde la Semana ${startWeek + 1} hasta final de año...`;
 
         setTimeout(() => {
-            const success = generateYear();
+            const success = generateYear(startWeek);
             if (!success) {
-                alert("Hubo un bloqueo matemático muy complejo al conectar las 52 semanas. Por favor, intenta de nuevo.");
+                alert("Hubo un bloqueo matemático muy complejo. Por favor, intenta de nuevo.");
             } else {
-                weekSelector.value = 0;
+                weekSelector.value = startWeek;
                 renderActiveWeek();
             }
             overlay.classList.add('hidden');
@@ -322,6 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     btn.addEventListener('click', startGeneration);
+
     startGeneration(); // Genera al cargar
 
     // Función de exportación a Excel (Styled XLS a través de HTML)
@@ -383,6 +401,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         globalYearSchedule.forEach((weekSchedule, weekIdx) => {
+            let totalShiftsInWeek = 0;
+            weekSchedule.forEach(workerDays => workerDays.forEach(s => { if (s !== '') totalShiftsInWeek++; }));
+            if (totalShiftsInWeek === 0) return; // Saltar semanas vacías iniciales
+
             weekSchedule.forEach((workerDays, workerIdx) => {
                 let count = 0;
                 let hours = 0;

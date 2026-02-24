@@ -16,9 +16,20 @@
                 <h1>Rueda de Enfermería</h1>
                 <p>Generador inteligente de turnos para el área de Esterilización</p>
             </div>
-            <button id="generateBtn" class="btn-primary">
-                <span class="icon">✨</span> Generar Todo el Año
-            </button>
+            <div style="display: flex; gap: 1.5rem; align-items: center;">
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem;">
+                    <label for="startWeekSetting"
+                        style="font-size: 0.8rem; font-weight: 800; color: var(--text-secondary); text-transform: uppercase;">Semana
+                        de Inicio:</label>
+                    <select id="startWeekSetting" class="form-select"
+                        style="background: white; padding: 0.5rem 1rem; border-color: var(--border-dark);">
+                        <!-- JS -->
+                    </select>
+                </div>
+                <button id="generateBtn" class="btn-primary">
+                    <span class="icon">✨</span> Generar Calendario
+                </button>
+            </div>
         </header>
 
         <main>
