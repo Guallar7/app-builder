@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CATA-HUMS | Manejo de Insulina</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="legal-notice no-print">
+        ⚠️ <strong>Aviso Clínico:</strong> Esta herramienta es un apoyo a la consulta. No sustituye el juicio clínico. Verifique siempre las indicaciones antes de su entrega al paciente.
+    </div>
+
+    <main class="container">
+        <header class="app-header no-print">
+            <div class="header-content">
+                <h1>CATA-HUMS</h1>
+                <p>Instrucciones de Insulinoterapia - Cirugía de Cataratas</p>
+            </div>
+        </header>
+
+        <!-- SECCIÓN DE FORMULARIO -->
+        <section class="form-section no-print" id="form-section">
+            <form id="cata-form">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="step-badge">1</span>
+                        <h2>Datos del Paciente <span class="optional-tag">(Opcional)</span></h2>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="paciente-nombre" placeholder="Nombre completo del paciente">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="step-badge">2</span>
+                        <h2>Pauta Antidiabética Actual</h2>
+                    </div>
+                    <p class="subtitle">Seleccione todas las opciones que lleve el paciente:</p>
+                    
+                    <div class="checkbox-group">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="chk-orales" name="tratamiento" value="orales">
+                            <span class="checkmark"></span>
+                            Otros antidiabéticos orales
+                        </label>
+                        
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="chk-bomba" name="tratamiento" value="bomba">
+                            <span class="checkmark"></span>
+                            Bomba de insulina
+                        </label>
+
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="chk-rapida" name="tratamiento" value="rapida">
+                            <span class="checkmark"></span>
+                            Insulina rápida / correctora
+                        </label>
+
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="chk-lenta-matutina" name="tratamiento" value="matutina">
+                            <span class="checkmark"></span>
+                            Insulina lenta matutina
+                        </label>
+
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="chk-lenta-vespertina" name="tratamiento" value="vespertina">
+                            <span class="checkmark"></span>
+                            Insulina lenta vespertina
+                        </label>
+                    </div>
+
+                    <!-- Condicional para dosis vespertina -->
+                    <div class="hidden-field" id="dosis-vespertina-container">
+                        <div class="input-group mt-3">
+                            <label for="dosis-habitual" class="field-label">Dosis habitual nocturna (en UI): <span class="required">*</span></label>
+                            <input type="number" id="dosis-habitual" min="1" step="1" placeholder="Ej. 20">
+                            <small class="error-msg" id="dosis-error">Debe introducir la dosis habitual para calcular el 70%.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="step-badge">3</span>
+                        <h2>Observaciones Adicionales <span class="optional-tag">(Opcional)</span></h2>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="observaciones" rows="2" placeholder="Información extra que desee aparezca en el informe del paciente..."></textarea>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-secondary" id="btn-reiniciar">Reiniciar / Limpiar</button>
+                    <button type="button" class="btn btn-primary" id="btn-procesar">Generar Instrucciones</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- SECCIÓN DE RESULTADOS / IMPRESIÓN -->
+        <section class="print-section hidden" id="print-section">
+            <div class="print-document">
+                <div class="print-header">
+                    <h2>Servicio de Oftalmología</h2>
+                    <h3>Instrucciones Preoperatorias: Cirugía de Cataratas</h3>
+                    <div class="print-meta">
+                        <div class="patient-info-print" id="print-patient-info"></div>
+                        <div class="date-info" id="print-date"></div>
+                    </div>
+                    <hr class="print-divider">
+                </div>
+
+                <div class="print-body">
+                    <h4 class="instructions-title">Instrucciones sobre su medicación antidiabética:</h4>
+                    <div class="instructions-container" id="print-instructions-list">
+                        <!-- El JS inyectará el contenido dinámicamente aquí -->
+                    </div>
+                </div>
+
+                <div class="print-observations hidden" id="print-observations-container">
+                    <hr class="print-divider small">
+                    <h4 class="instructions-title">Observaciones adicionales:</h4>
+                    <p id="print-observations"></p>
+                </div>
+
+                <div class="print-footer">
+                    <hr class="print-divider">
+                    <p class="final-note"><strong>Importante:</strong> Por favor, siga estas instrucciones cuidadosamente y traiga este documento el día de su cirugía.</p>
+                </div>
+            </div>
+
+            <!-- Notas Internas que no se imprimen -->
+            <div class="doctor-notes hidden no-print" id="internal-notes-container">
+                <h5>📋 Nota Interna para el Médico (No se imprime)</h5>
+                <ul id="internal-notes-list"></ul>
+            </div>
+
+            <div class="action-buttons no-print mt-4">
+                <button type="button" class="btn btn-secondary" id="btn-volver">← Editar</button>
+                <button type="button" class="btn btn-success" id="btn-imprimir">🖨️ Imprimir</button>
+            </div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
