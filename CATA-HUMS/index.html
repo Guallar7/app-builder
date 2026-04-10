@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CATA-HUMS | Manejo de Insulina</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,11 +13,20 @@
         ⚠️ <strong>Aviso Clínico:</strong> Esta herramienta es un apoyo a la consulta. No sustituye el juicio clínico. Verifique siempre las indicaciones antes de su entrega al paciente.
     </div>
 
+    <!-- Top Navbar Corporativa -->
+    <nav class="top-navbar no-print">
+        <div class="navbar-container">
+            <img src="hums_logo.png" alt="Hospital Universitario Miguel Servet" class="navbar-logo">
+            <div class="navbar-brand">CATA-HUMS</div>
+        </div>
+    </nav>
+
     <main class="container">
         <header class="app-header no-print">
             <div class="header-content">
-                <h1>CATA-HUMS</h1>
-                <p>Instrucciones de Insulinoterapia - Cirugía de Cataratas</p>
+                <h1>Manejo de Insulina</h1>
+                <p>Instrucciones Preoperatorias para Cirugía de Cataratas</p>
+                <p class="hospital-name-subtitle">Servicios de Anestesiología y Oftalmología</p>
             </div>
         </header>
 
@@ -102,9 +112,13 @@
         <!-- SECCIÓN DE RESULTADOS / IMPRESIÓN -->
         <section class="print-section hidden" id="print-section">
             <div class="print-document">
+                <div class="institutional-banner print-only-banner">
+                    <img src="hums_logo.png" alt="Hospital Universitario Miguel Servet" class="logo-hums print-logo">
+                </div>
+                
                 <div class="print-header">
-                    <h2>Servicio de Oftalmología</h2>
-                    <h3>Instrucciones Preoperatorias: Cirugía de Cataratas</h3>
+                    <h3>Servicios de Anestesiología y Oftalmología</h3>
+                    <p class="doc-title-print">Instrucciones Preoperatorias: Cirugía de Cataratas</p>
                     <div class="print-meta">
                         <div class="patient-info-print" id="print-patient-info"></div>
                         <div class="date-info" id="print-date"></div>
