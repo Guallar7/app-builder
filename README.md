@@ -35,11 +35,12 @@ Si no sabes qué es GitHub o prefieres que todo sea automático, esta es tu opci
 4. ✨ **Escribe el comando mágico**
    - En el chat, escribe:
    ```
-   /create-vanilla-app
+   /create-vanilla-app-v2
    ```
-   - Presiona Enter y **la IA te guiará paso a paso**
-   - Solo tienes que describir tu idea en lenguaje normal
-   - La IA creará tu aplicación automáticamente
+   - *(Opcional: puedes usar el comando original `/create-vanilla-app` si prefieres algo más simple).*
+   - Presiona Enter y **la IA te guiará paso a paso**.
+   - **V2 es la versión recomendada**: Es más profesional, crea carpetas organizadas, permite guardar datos (persistencia) y tiene un proceso de diseño mucho más detallado.
+   - Solo tienes que describir tu idea en lenguaje normal y la IA se encargará de todo.
 
 5. 🎉 **¡Hecho!**
    - Busca el archivo `index.html` en la carpeta que creó la IA
@@ -54,7 +55,7 @@ Si ya conoces GitHub o quieres que las versiones de tu app queden guardadas auto
 
 1. **Clona este repositorio** en tu ordenador
 2. **Abre la carpeta en tu IA** (Antigravity, Claude Code, etc.)
-3. **Ejecuta `/create-vanilla-app`** y deja que la IA cree todo
+3. **Ejecuta `/create-vanilla-app-v2`** (recomendado para apps más robustas)
 4. **La IA guardará automáticamente los cambios** en GitHub
 
 ---
@@ -84,7 +85,9 @@ Aquí tienes un ejemplo real de lo que puedes crear con esto:
   - Para probarla: Entra en esa carpeta y haz **doble clic** en `index.html`
 
 ### El "cerebro" de la IA
-- 📁 **`.agent/workflows/`**: Aquí están las instrucciones que le dicen a la IA cómo construir apps bonitas, seguras y que funcionen sin necesidad de instalar nada
+- 📁 **`.agent/workflows/`**: Aquí están las instrucciones que le dicen a la IA cómo construir apps.
+  - `/create-vanilla-app-v2`: **Nuestra recomendación.** Más interactivo, profesional y con funciones avanzadas (guardado de datos, validación robusta).
+  - `/create-vanilla-app`: La versión original, ideal para prototipos ultra-rápidos y simples.
 
 ---
 
