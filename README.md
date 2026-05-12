@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.webp" alt="App Builder Salud" width="360">
+  <img src="assets/logo.webp" alt="App Builder" width="360">
 </p>
 
 # 🏥 Crea Aplicaciones Personalizadas (Sin saber programar)
