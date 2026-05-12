@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App Builder</title>
+    <meta name="description" content="Crea pequeñas aplicaciones con IA sin saber programar: calculadoras, turnos, formularios y herramientas locales.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="App Builder">
+    <meta property="og:description" content="Crea pequeñas aplicaciones con IA sin saber programar: calculadoras, turnos, formularios y herramientas locales.">
+    <meta property="og:url" content="https://guallar7.github.io/app-builder/">
+    <meta property="og:image" content="https://guallar7.github.io/app-builder/assets/og-image.png">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="640">
+    <meta property="og:image:alt" content="App Builder: apps útiles con IA sin saber programar.">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="App Builder">
+    <meta name="twitter:description" content="Crea pequeñas aplicaciones con IA sin saber programar: calculadoras, turnos, formularios y herramientas locales.">
+    <meta name="twitter:image" content="https://guallar7.github.io/app-builder/assets/og-image.png">
+
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #111827;
+        --muted: #475569;
+        --mint: #d7f3eb;
+        --blue: #dbeafe;
+        --rose: #fde2e4;
+        --cream: #fbf5e8;
+        --teal: #0f766e;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      main {
+        width: min(100%, 980px);
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 56px;
+        align-items: center;
+        padding: 56px;
+        border: 4px solid var(--ink);
+        border-radius: 36px;
+        background:
+          radial-gradient(circle at 8% 20%, var(--mint) 0 25%, transparent 26%),
+          radial-gradient(circle at 98% 4%, #e8ddfb 0 22%, transparent 23%),
+          radial-gradient(circle at 90% 100%, var(--rose) 0 22%, transparent 23%),
+          rgba(255, 255, 255, 0.48);
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 30px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(48px, 7vw, 84px);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 24px 0 0;
+        color: var(--muted);
+        font-size: clamp(22px, 3vw, 34px);
+        line-height: 1.28;
+      }
+
+      strong {
+        color: var(--teal);
+        font-weight: 650;
+      }
+
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .pill {
+        padding: 10px 20px;
+        border: 3px solid var(--ink);
+        border-radius: 999px;
+        font-size: 22px;
+      }
+
+      .pill:nth-child(1) {
+        background: var(--mint);
+      }
+
+      .pill:nth-child(2) {
+        background: var(--blue);
+      }
+
+      .pill:nth-child(3) {
+        background: var(--rose);
+      }
+
+      a {
+        display: inline-block;
+        margin-top: 38px;
+        padding: 16px 24px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: white;
+        font-size: 21px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      @media (max-width: 760px) {
+        main {
+          grid-template-columns: 1fr;
+          gap: 28px;
+          padding: 28px;
+        }
+
+        img {
+          max-width: 260px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="assets/logo.webp" alt="App Builder">
+      <section>
+        <h1>App Builder</h1>
+        <p><strong>Apps útiles con IA</strong><br>sin saber programar.</p>
+        <div class="pills" aria-label="Ejemplos de apps">
+          <span class="pill">Calculadoras</span>
+          <span class="pill">Turnos</span>
+          <span class="pill">Formularios</span>
+        </div>
+        <p>Tú describes la idea. La IA escribe el código.</p>
+        <a href="https://github.com/Guallar7/app-builder">Ver repositorio</a>
+      </section>
+    </main>
+  </body>
+</html>
