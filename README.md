@@ -8,7 +8,7 @@ Necesitas crear una herramienta personalizada (calculadora clínica, generador d
 
 ---
 
-## 🚀 Cómo crear tu aplicación (4 pasos fáciles)
+## 🚀 Cómo crear tu aplicación (5 pasos fáciles)
 
 ### **Opción Recomendada: Usa un Asistente de IA** (La forma más fácil)
 
@@ -29,7 +29,7 @@ Si no sabes qué es GitHub o prefieres que todo sea automático, esta es tu opci
    - Descomprime la carpeta en tu escritorio
 
 3. 📂 **Abre la carpeta con tu IA**
-   - En tu asistente de IA, abre esta carpeta (muchas IAe tienen botones para esto)
+   - En tu asistente de IA, abre esta carpeta (muchas IAs tienen botones para esto)
    - La IA cargará automáticamente las instrucciones
 
 4. ✨ **Escribe el comando mágico**
@@ -57,6 +57,52 @@ Si ya conoces GitHub o quieres que las versiones de tu app queden guardadas auto
 2. **Abre la carpeta en tu IA** (Antigravity, Claude Code, etc.)
 3. **Ejecuta `/create-vanilla-app-v2`** (recomendado para apps más robustas)
 4. **La IA guardará automáticamente los cambios** en GitHub
+
+---
+
+## 🧠 Opción para usuarios más técnicos: Codex
+
+Si ya usas **Codex** o te sientes cómodo trabajando con un agente de programación, este repositorio también incluye un skill más avanzado:
+
+```txt
+$ai-app-builder
+```
+
+Esta opción está pensada para aplicaciones más complejas que una app que se abre con doble clic. Por ejemplo:
+
+- Apps con usuarios y login
+- Bases de datos
+- Permisos por tipo de usuario
+- Paneles internos
+- Formularios que guardan información
+- Archivos privados
+- Despliegue profesional en internet
+
+Para la mayoría de personas sin experiencia técnica, la mejor opción sigue siendo **Antigravity + `/create-vanilla-app-v2`**.
+
+Usa `$ai-app-builder` solo si quieres que Codex planifique y construya una app más grande, con más piezas técnicas.
+
+### Cómo trabaja
+
+Antes de escribir código, Codex te hará preguntas, resumirá lo que entiende, propondrá un plan y te pedirá confirmación. Solo empezará a construir cuando apruebes el plan.
+
+### Diferencia rápida
+
+- `/create-vanilla-app-v2` crea apps simples en HTML/CSS/JS que funcionan abriendo `index.html`.
+- `$ai-app-builder` ayuda a Codex a crear apps más completas, con servidor, login, base de datos y despliegue.
+
+Si estás creando una calculadora, una herramienta local o un prototipo rápido, usa `/create-vanilla-app-v2`.
+Si necesitas usuarios, datos persistentes, roles o un producto más mantenible, usa `$ai-app-builder`.
+
+### Dónde vive esta opción
+
+El skill de Codex está en:
+
+```txt
+.agents/skills/ai-app-builder/
+```
+
+No necesitas tocar esa carpeta para usarlo. Está ahí para que Codex tenga instrucciones claras sobre cómo ayudarte a crear una app más avanzada.
 
 ---
 
@@ -88,6 +134,7 @@ Aquí tienes un ejemplo real de lo que puedes crear con esto:
 - 📁 **`.agent/workflows/`**: Aquí están las instrucciones que le dicen a la IA cómo construir apps.
   - `/create-vanilla-app-v2`: **Nuestra recomendación.** Más interactivo, profesional y con funciones avanzadas (guardado de datos, validación robusta).
   - `/create-vanilla-app`: La versión original, ideal para prototipos ultra-rápidos y simples.
+- 📁 **`.agents/skills/ai-app-builder/`**: Skill avanzado para Codex, pensado para apps más complejas con login, datos guardados y despliegue profesional.
 
 ---
 
