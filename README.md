@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.webp" alt="App Builder Salud" width="360">
+</p>
+
 # 🏥 Crea Aplicaciones Personalizadas (Sin saber programar)
 
 ¡Hola! 👋 Si eres **médico, enfermero/a o profesional sanitario**, este es tu lugar.
