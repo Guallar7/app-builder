@@ -25,8 +25,8 @@ Use TypeScript by default. Prefer:
 - Zod for input validation.
 - Vitest for unit tests of domain logic.
 - Playwright for E2E tests of the critical flow.
-- Vercel for app deployment and Railway for Postgres.
-- Railway S3-compatible storage with presigned PUT/GET URLs for private files.
+- Vercel for app deployment and Supabase for Postgres.
+- Supabase Storage with signed upload/download URLs for private files.
 
 ### Technology Flexibility
 
@@ -44,7 +44,7 @@ Before deep interview, design, or implementation:
 1. Inventory candidate technologies: the preferred stack and any alternatives that may fit better.
 2. Consult official or primary sources for each relevant technology. Prefer official docs, changelogs, migration guides, and quickstarts.
 3. Confirm current install commands, stable recommended versions, recent changes, recommended patterns, and deprecated APIs.
-4. Pay special attention to Next.js App Router, Server Actions, middleware/proxy behavior, Prisma Client, Tailwind, Clerk, testing, and deployment.
+4. Pay special attention to Next.js App Router, Server Actions, middleware/proxy behavior, Prisma Client, Tailwind, Clerk, Supabase, testing, and deployment.
 5. If Clerk is a candidate, consult current Clerk CLI docs and evaluate whether the CLI should configure auth.
 6. If adding any dependency, consult official docs first and justify the dependency.
 7. If internet or documentation tools are unavailable, state that clearly and flag decisions that should be verified.
@@ -103,7 +103,7 @@ Layer rules:
 - `lib/domain/` contains pure, testable rules.
 - `lib/services/` contains persistent use cases and Prisma access.
 - `lib/validators/` contains Zod schemas.
-- `lib/storage/` contains S3 integration when needed.
+- `lib/storage/` contains Supabase Storage integration when needed.
 - Do not mix business rules into JSX.
 - Do not access Prisma from client components.
 - Do not hardcode secrets.
@@ -147,7 +147,7 @@ Cover at minimum:
 10. External integrations.
 11. UI requirements: visual tone, density, mobile/desktop, accessibility.
 12. Non-functional requirements: privacy, audit, performance, limits, languages.
-13. Deploy: Vercel/Railway, environments, variables, domains.
+13. Deploy: Vercel/Supabase, environments, variables, domains.
 14. Expected tests and most important E2E flow.
 15. Explicitly out-of-scope items for the first version.
 

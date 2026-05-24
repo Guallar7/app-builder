@@ -95,6 +95,16 @@ Antes de escribir código, Codex te hará preguntas, resumirá lo que entiende, 
 - `/create-vanilla-app-v2` crea apps simples en HTML/CSS/JS que funcionan abriendo `index.html`.
 - `$ai-app-builder` ayuda a Codex a crear apps más completas, con servidor, login, base de datos y despliegue.
 
+### Stack resumido
+
+Para mantenerlo fácil de entender, la opción avanzada se apoya en estas piezas principales:
+
+- **Next.js + React + TypeScript** para construir la aplicación.
+- **Tailwind CSS** para la interfaz.
+- **Clerk** para usuarios y login.
+- **Supabase** para base de datos PostgreSQL y archivos.
+- **Vercel** para publicar la app en internet.
+
 Si estás creando una calculadora, una herramienta local o un prototipo rápido, usa `/create-vanilla-app-v2`.
 Si necesitas usuarios, datos persistentes, roles o un producto más mantenible, usa `$ai-app-builder`.
 

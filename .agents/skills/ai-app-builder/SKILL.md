@@ -35,7 +35,7 @@ Always read `references/fullstack-app-playbook.md` before deep discovery or impl
 
 ## Default Technical Direction
 
-Use TypeScript by default. Prefer the stack in the playbook: Next.js App Router, React, strict TypeScript, Server Components, Server Actions, Route Handlers, Tailwind CSS, lucide-react, Clerk, PostgreSQL, Prisma, Zod, Vitest, Playwright, Vercel, Railway Postgres, and S3-compatible Railway storage for private files.
+Use TypeScript by default. Prefer the stack in the playbook: Next.js App Router, React, strict TypeScript, Server Components, Server Actions, Route Handlers, Tailwind CSS, lucide-react, Clerk, PostgreSQL, Prisma, Zod, Vitest, Playwright, Vercel, Supabase Postgres, and Supabase Storage for private files.
 
 Treat that stack as a strong default, not a rigid rule. Propose alternatives only when they clearly improve the product for concrete reasons such as product requirements, complexity, cost, performance, team fit, deployment, integrations, maturity, maintenance, or current documentation.
 
