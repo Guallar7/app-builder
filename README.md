@@ -41,7 +41,6 @@ Si no sabes qué es GitHub o prefieres que todo sea automático, esta es tu opci
    ```
    /create-vanilla-app-v2
    ```
-   - *(Opcional: puedes usar el comando original `/create-vanilla-app` si prefieres algo más simple).*
    - Presiona Enter y **la IA te guiará paso a paso**.
    - **V2 es la versión recomendada**: Es más profesional, crea carpetas organizadas, permite guardar datos (persistencia) y tiene un proceso de diseño mucho más detallado.
    - Solo tienes que describir tu idea en lenguaje normal y la IA se encargará de todo.
@@ -147,7 +146,6 @@ Aquí tienes un ejemplo real de lo que puedes crear con esto:
 ### El "cerebro" de la IA
 - 📁 **`.agent/workflows/`**: Aquí están las instrucciones que le dicen a la IA cómo construir apps.
   - `/create-vanilla-app-v2`: **Nuestra recomendación.** Más interactivo, profesional y con funciones avanzadas (guardado de datos, validación robusta).
-  - `/create-vanilla-app`: La versión original, ideal para prototipos ultra-rápidos y simples.
 - 📁 **`.agents/skills/ai-app-builder/`**: Skill avanzado para Codex, pensado para apps más complejas con login, datos guardados y despliegue profesional.
 
 ---
